@@ -27,6 +27,7 @@ const displayNewsMenu = newsCat => {
 
 
 const loadNews = (id, name) => {
+    toggolLoader(true)
     console.log('cntry id', id);
 
     const url = `https://openapi.programming-hero.com/api/news/category/0${id}`
@@ -49,16 +50,13 @@ const displayNews = (an) => {
     const allNews = document.getElementById('all-news')
     allNews.innerHTML = ""
 
-
-
-
     console.log('niside news', an.length);
     if (an.length > 0) {
         an.map(news => {
             console.log(news?.author?.published_date);
-             
-            
-            
+
+
+
 
             const article = document.createElement('div')
             article.classList.add('card')
@@ -80,7 +78,7 @@ const displayNews = (an) => {
                                     <img src="${news?.author ? news?.author?.img : "https://avatars.githubusercontent.com/u/28301945?s=40&v=4"}" alt=""
                                         class="rounded-circle border border-5 mt-2" width="50" height="50">
                                     <div class="ps-3 mt-2">
-                                        <p class="ps-1">${(news?.author?.name !== null  && news?.author?.name !== '') ? news?.author?.name : '<span class="text-danger"> No author Found </span>'}
+                                        <p class="ps-1">${(news?.author?.name !== null && news?.author?.name !== '') ? news?.author?.name : '<span class="text-danger"> No author Found </span>'}
                                             <br>
                                            ${(news?.author?.published_date !== null) ? news?.author?.published_date.split(" ")[0] : '<span class="text-danger"> No Date Found </span>'}
                                         </p>
@@ -95,7 +93,9 @@ const displayNews = (an) => {
                 </div>
 
             `
+
             allNews.appendChild(article)
+            toggolLoader(false)
         });
     } else {
         const article = document.createElement('div')
@@ -155,11 +155,9 @@ const displaySingleNews = newsData => {
 
 }
 
+// Loader JS
 
-
-
-
-const toggolLoader = isLoading =>{
+const toggolLoader = isLoading => {
     const loader = document.getElementById('loader')
     if (isLoading) {
         loader.classList.remove('d-none')
@@ -167,6 +165,8 @@ const toggolLoader = isLoading =>{
         loader.classList.add('d-none')
     }
 }
+
+
 // ${newsData?.author.name ? newsData?.author?.name : 'No author Found'}
 
 // ${(newsData?.author?.name.length === 0) ? 'true' : 'felse' }
