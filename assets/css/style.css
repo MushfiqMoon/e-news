@@ -64,9 +64,11 @@ Home Page
     background: transparent;
     transition: 0.3s;
 }
-.no-style-btn:hover{
+
+.no-style-btn:hover {
     color: #000;
 }
+
 .logo img {
     width: 65px;
 
@@ -109,3 +111,12 @@ Blog Page
     height: 150px;
     border-bottom: 2px solid var(--primary);
 }
+
+
+
+
+/* ==============
+Mobile Responsive
+=================*/
+
+

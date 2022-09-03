@@ -28,7 +28,6 @@ const displayNewsMenu = newsCat => {
 
 const loadNews = (id, name) => {
     toggolLoader(true)
-    console.log('cntry id', id);
 
     const url = `https://openapi.programming-hero.com/api/news/category/0${id}`
 
@@ -40,23 +39,43 @@ const loadNews = (id, name) => {
         .then(data => displayNews(data.data))
         .catch(error => console.log(error))
 
+
 }
 
 const displayNews = (an) => {
-    // console.log(an.length);
     const nfAmount = document.getElementById('nf-amount')
     nfAmount.innerText = `${an.length}`
 
     const allNews = document.getElementById('all-news')
-    allNews.innerHTML = ""
 
-    console.log('niside news', an.length);
+    allNews.innerHTML = ""
+    console.log('niside news', an);
+
+
+    // let  = document.getElementById('view-select')
+
+    // function onChange() {
+    //     var value = view.value;
+    //     var text = view.options[view.selectedIndex].text;
+    //     console.log(value, text);
+    //   }
+    //   view.onchange = onChange;
+    //   onChange()
+
+    // if (view.innerText === 'Top View') {
+    //     an.sort((a, b) => b.total_view - a.total_view);
+    // }else{
+    //     return an
+    // }
+
+    an.sort((a, b) => b.total_view - a.total_view);
+
+    
+
+    console.log(an);
+
     if (an.length > 0) {
         an.map(news => {
-            console.log(news?.author?.published_date);
-
-
-
 
             const article = document.createElement('div')
             article.classList.add('card')
@@ -93,7 +112,6 @@ const displayNews = (an) => {
                 </div>
 
             `
-
             allNews.appendChild(article)
             toggolLoader(false)
         });
@@ -106,15 +124,13 @@ const displayNews = (an) => {
             </div>
         `
         allNews.appendChild(article)
+        toggolLoader(false)
     }
-
 }
-
 
 const loadSingleNews = newId => {
 
     const url = `https://openapi.programming-hero.com/api/news/${newId}`
-    // const url = `https://openapi.programming-hero.com/api/news/2e78e5e0310c2e9adbb6efb1a263e745`
     fetch(url)
         .then(res => res.json())
         .then(data => displaySingleNews(data.data[0]))
@@ -123,7 +139,6 @@ const loadSingleNews = newId => {
 }
 
 const displaySingleNews = newsData => {
-    console.log('cntry id', newsData);
 
     const modalContent = document.getElementById('modal-body')
 
@@ -161,7 +176,7 @@ const toggolLoader = isLoading => {
     const loader = document.getElementById('loader')
     if (isLoading) {
         loader.classList.remove('d-none')
-    }else{
+    } else {
         loader.classList.add('d-none')
     }
 }
