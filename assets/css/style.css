@@ -118,5 +118,29 @@ Blog Page
 /* ==============
 Mobile Responsive
 =================*/
-
+@media screen and (max-width:767px) {
+    .all-news .card-body,
+    .single-article {
+        max-width: 80%;
+        margin: auto;
+    }
+    .single-article img {
+        width: 100%;
+        margin: auto;
+    }
+}
+@media screen and (max-width:575px) {
+    .all-news .card-body,
+    .single-article {
+        max-width: 100%;
+        margin: auto;
+    }
+    .moblie-font{
+        font-size: 12px;
+    }
+    .group-btn a:nth-child(2),
+    .sorting select {
+        margin-top: 10px;
+    }
+}
 

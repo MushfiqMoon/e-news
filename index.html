@@ -40,7 +40,7 @@
         <nav class="py-3 mb-4 border-bottom main-menu">
             <div class="container">
                 <ul id="main-menu" class="nav d-flex flex-wrap justify-content-evenly">
-                    <li class="nav-item"><button class="nav-link link-dark">Home</button></li>
+                    <!-- <li class="nav-item"><button class="nav-link link-dark">Home</button></li> -->
                 </ul>
             </div>
         </nav>
@@ -58,10 +58,10 @@
                     <span>Sort By View:</span>
                     <select id="view-select">
                         <option value="1" selected>Default</option>
-                        <option value="2">Top View</option>
+                        <option value="2">Grid</option>
                     </select>
                 </div>
-                <div>
+                <div class="group-btn">
                     <a href="#" class="btn btn-ebtn me-1">Today’s Pick</a>
                     <a href="#" class="btn btn-ebtn-outline">Trending</a>
                 </div>
@@ -70,20 +70,12 @@
             <article id="all-news">
 
             </article>
-            <div id="loader" class="d-flex justify-content-center my-5">
+            <div id="loader" class="d-flex justify-content-center my-5 d-none">
                 <div class="spinner-grow" style="color: var(--primary);" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>
             </div>
         </div>
-
-        <!-- Modal  -->
-
-
-        <!-- Button trigger modal -->
-        <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Launch demo modal
-        </button> -->
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -104,7 +96,7 @@
         </div>
     </main>
     <footer class="text-center bg-white p-3">
-        Copyright 2021 News Portal
+        Copyright 2022 E! News Portal
     </footer>
 
 
@@ -115,7 +107,6 @@
         crossorigin="anonymous"></script>
 
     <!-- custom JS -->
-    <script src="./assets/js/utility.js"></script>
     <script src="./assets/js/main.js"></script>
 </body>
 

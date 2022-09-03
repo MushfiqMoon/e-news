@@ -13,7 +13,7 @@ const displayNewsMenu = newsCat => {
     const allMenu = document.getElementById('main-menu')
 
     newsCat.forEach(menu => {
-        // console.log(menu);
+
         const menuItem = document.createElement('li')
         menuItem.classList.add('nav-item')
         menuItem.innerHTML = `
@@ -22,13 +22,14 @@ const displayNewsMenu = newsCat => {
         allMenu.appendChild(menuItem)
 
     });
-
 }
 
-
 const loadNews = (id, name) => {
+
     toggolLoader(true)
 
+    const allNews = document.getElementById('all-news')
+    allNews.innerHTML = ""
     const url = `https://openapi.programming-hero.com/api/news/category/0${id}`
 
     const nfCat = document.getElementById('nf-cat')
@@ -39,40 +40,29 @@ const loadNews = (id, name) => {
         .then(data => displayNews(data.data))
         .catch(error => console.log(error))
 
-
 }
 
 const displayNews = (an) => {
+
     const nfAmount = document.getElementById('nf-amount')
     nfAmount.innerText = `${an.length}`
 
     const allNews = document.getElementById('all-news')
 
-    allNews.innerHTML = ""
-    console.log('niside news', an);
+    const viewSelect = document.getElementById("view-select");
 
+    function onChange() {
+        let value = viewSelect.value;
+        console.log(value);
+        if (value === 1) {
+            console.log('ok');
+        }
+    }
+    viewSelect.onchange = onChange;
+    onChange();
 
-    // let  = document.getElementById('view-select')
-
-    // function onChange() {
-    //     var value = view.value;
-    //     var text = view.options[view.selectedIndex].text;
-    //     console.log(value, text);
-    //   }
-    //   view.onchange = onChange;
-    //   onChange()
-
-    // if (view.innerText === 'Top View') {
-    //     an.sort((a, b) => b.total_view - a.total_view);
-    // }else{
-    //     return an
-    // }
 
     an.sort((a, b) => b.total_view - a.total_view);
-
-    
-
-    console.log(an);
 
     if (an.length > 0) {
         an.map(news => {
@@ -85,14 +75,16 @@ const displayNews = (an) => {
 
                 <div class="row g-0">
                     <div class="col-md-3 p-3">
-                        <img src="${news?.thumbnail_url ? news?.thumbnail_url : "No Image Found"}" alt="${news.title}">
+                        <div class="single-article">
+                            <img src="${news?.thumbnail_url ? news?.thumbnail_url : "No Image Found"}" alt="${news.title}">
+                        </div>
                     </div>
                     <div class="col-md-9">
-                        <div class="card-body p-5 ps-1">
+                        <div class="card-body p-md-5 ps-3">
                             <h5 class="card-title">${news.title}</h5>
                             <p class="card-text">${news.details.slice(0, 300)}...</p>                           
                             
-                            <div class="d-flex justify-content-between align-items-center mt-5">
+                            <div class="d-flex justify-content-between align-items-center mt-5 moblie-font">
                                 <div class="d-flex">
                                     <img src="${news?.author ? news?.author?.img : "https://avatars.githubusercontent.com/u/28301945?s=40&v=4"}" alt=""
                                         class="rounded-circle border border-5 mt-2" width="50" height="50">
@@ -110,7 +102,6 @@ const displayNews = (an) => {
                         </div>
                     </div>
                 </div>
-
             `
             allNews.appendChild(article)
             toggolLoader(false)
@@ -135,7 +126,6 @@ const loadSingleNews = newId => {
         .then(res => res.json())
         .then(data => displaySingleNews(data.data[0]))
         .catch(error => console.log(error))
-
 }
 
 const displaySingleNews = newsData => {
@@ -164,14 +154,12 @@ const displaySingleNews = newsData => {
         </div>
         <div class="d-flex align-items-center"><i class="fa-regular fa-eye pe-2"></i>${newsData?.total_view ? newsData?.total_view : '<span class="text-danger">No View Yet</span>'}</div>
         <div class="pe-5">Rating</div>
-    </div>
-                    
+    </div>                   
     `
 
 }
 
 // Loader JS
-
 const toggolLoader = isLoading => {
     const loader = document.getElementById('loader')
     if (isLoading) {
@@ -180,16 +168,3 @@ const toggolLoader = isLoading => {
         loader.classList.add('d-none')
     }
 }
-
-
-// ${newsData?.author.name ? newsData?.author?.name : 'No author Found'}
-
-// ${(newsData?.author?.name.length === 0) ? 'true' : 'felse' }
-// ${(newsData?.author?.name === null ) ? 'true' : 'felse' }
-
-// ${newsData?.author?.published_date ? newsData?.author?.published_date : '<span> No published date Found </span>' }
-
-
-// ${dateonly ? dateonly[0] : 'No Date Found'}
-
-// Tucker Carlson: Putin Winning in Ukraine, Biden Hurting West
