@@ -1,3 +1,4 @@
+// Loading All the Category Item
 const loadNewsCat = () => {
 
     fetch(`https://openapi.programming-hero.com/api/news/categories`)
@@ -8,6 +9,7 @@ const loadNewsCat = () => {
 
 loadNewsCat()
 
+// Showing All the Category on the DOM
 const displayNewsMenu = newsCat => {
 
     const allMenu = document.getElementById('main-menu')
@@ -16,6 +18,7 @@ const displayNewsMenu = newsCat => {
 
         const menuItem = document.createElement('li')
         menuItem.classList.add('nav-item')
+        menuItem.classList.add('main-item')
         menuItem.innerHTML = `
         <button onclick="loadNews(${menu.category_id},'${menu.category_name}')" class="nav-link link-dark">${menu.category_name}</button>
         `
@@ -24,8 +27,22 @@ const displayNewsMenu = newsCat => {
     });
 }
 
+// Fetching News data based on Category Name to ID
 const loadNews = (id, name) => {
 
+    // Adding active class on Menu
+    const menuItem = document.getElementsByClassName('main-item')
+    for (const el of menuItem) {
+        el.addEventListener('click', function () {
+            for (const itm of menuItem) {
+                itm.classList.remove('active')
+            }
+
+            this.classList.add('active')
+        })
+    }
+
+    // Loader ON
     toggolLoader(true)
 
     const allNews = document.getElementById('all-news')
@@ -42,26 +59,14 @@ const loadNews = (id, name) => {
 
 }
 
+// Desplaying News data based on Category 
 const displayNews = (an) => {
-
     const nfAmount = document.getElementById('nf-amount')
     nfAmount.innerText = `${an.length}`
 
     const allNews = document.getElementById('all-news')
 
-    const viewSelect = document.getElementById("view-select");
-
-    function onChange() {
-        let value = viewSelect.value;
-        console.log(value);
-        if (value === 1) {
-            console.log('ok');
-        }
-    }
-    viewSelect.onchange = onChange;
-    onChange();
-
-
+    //Sorting news based on Total views
     an.sort((a, b) => b.total_view - a.total_view);
 
     if (an.length > 0) {
@@ -72,53 +77,56 @@ const displayNews = (an) => {
             article.classList.add('my-3')
 
             article.innerHTML = `
-
-                <div class="row g-0">
-                    <div class="col-md-3 p-3">
-                        <div class="single-article">
-                            <img src="${news?.thumbnail_url ? news?.thumbnail_url : "No Image Found"}" alt="${news.title}">
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="card-body p-md-5 ps-3">
-                            <h5 class="card-title">${news.title}</h5>
-                            <p class="card-text">${news.details.slice(0, 300)}...</p>                           
-                            
-                            <div class="d-flex justify-content-between align-items-center mt-5 moblie-font">
-                                <div class="d-flex">
-                                    <img src="${news?.author ? news?.author?.img : "https://avatars.githubusercontent.com/u/28301945?s=40&v=4"}" alt=""
-                                        class="rounded-circle border border-5 mt-2" width="50" height="50">
-                                    <div class="ps-3 mt-2">
-                                        <p class="ps-1">${(news?.author?.name !== null && news?.author?.name !== '') ? news?.author?.name : '<span class="text-danger"> No author Found </span>'}
-                                            <br>
-                                           ${(news?.author?.published_date !== null) ? news?.author?.published_date.split(" ")[0] : '<span class="text-danger"> No Date Found </span>'}
-                                        </p>
+        
+                        <div class="row g-0">
+                            <div class="col-md-3 p-3">
+                                <div class="single-article">
+                                    <img src="${news?.thumbnail_url ? news?.thumbnail_url : "No Image Found"}" alt="${news.title}">
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="card-body p-md-5 ps-3">
+                                    <h5 class="card-title">${news.title}</h5>
+                                    <p class="card-text">${news.details.slice(0, 300)}...</p>                           
+                                    
+                                    <div class="d-flex justify-content-between align-items-center mt-5 moblie-font">
+                                        <div class="d-flex">
+                                            <img src="${news?.author ? news?.author?.img : "https://avatars.githubusercontent.com/u/28301945?s=40&v=4"}" alt=""
+                                                class="rounded-circle border border-5 mt-2" width="50" height="50">
+                                            <div class="ps-3 mt-2">
+                                                <p class="ps-1">${(news?.author?.name !== null && news?.author?.name !== '') ? news?.author?.name : '<span class="text-danger"> No author Found </span>'}
+                                                    <br>
+                                                   ${(news?.author?.published_date !== null) ? news?.author?.published_date.split(" ")[0] : '<span class="text-danger"> No Date Found </span>'}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center"><i class="fa-regular fa-eye pe-2 text-info"></i>${news?.total_view ? news?.total_view : '<span class="text-danger">No View Yet</span>'}</div>
+                                        <div><i class="fa-solid fa-star text-warning"></i>
+                                        ${news?.rating ? news?.rating?.number : '<span class="text-danger"> No Rating </span>'}
+                                        </div>
+                                        <div class="pe-5"><button class="no-style-btn" onclick="loadSingleNews('${news._id}')" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-arrow-right"></i></button> </div>
                                     </div>
                                 </div>
-                                <div class="d-flex align-items-center"><i class="fa-regular fa-eye pe-2"></i>${news?.total_view ? news?.total_view : '<span class="text-danger">No View Yet</span>'}</div>
-                                <div>Rating</div>
-                                <div class="pe-5"><button class="no-style-btn" onclick="loadSingleNews('${news._id}')" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-arrow-right"></i></button> </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            `
+                    `
             allNews.appendChild(article)
+            //Loader OFF
             toggolLoader(false)
         });
     } else {
         const article = document.createElement('div')
         article.innerHTML = `
-
-            <div class="alert alert-danger" role="alert">
-                No News Found iside this catagory
-            </div>
-        `
+        
+                    <div class="alert alert-danger" role="alert">
+                        No News Found iside this catagory
+                    </div>
+                `
         allNews.appendChild(article)
         toggolLoader(false)
     }
 }
-
+// Fetching data for Modal view
 const loadSingleNews = newId => {
 
     const url = `https://openapi.programming-hero.com/api/news/${newId}`
@@ -128,6 +136,7 @@ const loadSingleNews = newId => {
         .catch(error => console.log(error))
 }
 
+// Displaying data for Modal view
 const displaySingleNews = newsData => {
 
     const modalContent = document.getElementById('modal-body')
@@ -153,7 +162,9 @@ const displaySingleNews = newsData => {
             </div>
         </div>
         <div class="d-flex align-items-center"><i class="fa-regular fa-eye pe-2"></i>${newsData?.total_view ? newsData?.total_view : '<span class="text-danger">No View Yet</span>'}</div>
-        <div class="pe-5">Rating</div>
+        <div class="pe-5">
+        ${newsData?.rating ? newsData?.rating?.number : '<span class="text-danger"> No Rating </span>'}
+        </div>
     </div>                   
     `
 
@@ -168,3 +179,9 @@ const toggolLoader = isLoading => {
         loader.classList.add('d-none')
     }
 }
+
+// Menu Active
+
+// const navItem = document.querySelector('#main-menu').querySelectorAll('.main-item')
+
+// console.log(navItem);

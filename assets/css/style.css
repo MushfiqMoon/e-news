@@ -33,7 +33,9 @@ body {
     color: #fff;
     border-color: var(--primary);
 }
-
+.txt-p{
+    color: var(--primary);
+}
 /* ==============
 Home Page
 =================*/
@@ -43,7 +45,7 @@ Home Page
     border: none;
 }
 
-.nav-link:hover {
+.nav-item:hover .nav-link {
     color: var(--primary);
 }
 
@@ -52,7 +54,7 @@ Home Page
     color: var(--primary);
 }
 
-.main-menu .nav-link.active {
+.main-menu .main-item.active .nav-link {
     background-color: var(--secondery);
     border-radius: 5px;
     color: var(--primary);
