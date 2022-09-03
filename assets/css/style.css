@@ -15,6 +15,7 @@ body {
     transition: 0.3s;
     color: #fff;
 }
+
 .btn-ebtn-outline {
     border-color: var(--primary);
     transition: 0.3s;
@@ -26,6 +27,7 @@ body {
     color: var(--primary);
     border-color: var(--primary);
 }
+
 .btn-ebtn-outline:hover {
     background-color: var(--primary);
     color: #fff;
@@ -81,6 +83,12 @@ Home Page
     color: #ABADC6;
     border: none;
     padding: 5px;
+}
+
+#nf-amount,
+#nf-cat {
+    color: var(--primary);
+    font-weight: 500;
 }
 
 /* ==============
