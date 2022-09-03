@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- <link rel="icon" href="/favicon.ico" type="image/x-icon"> -->
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <title>E News</title>
+</head>
+
+<body>
+    <header>
+        <nav class="py-2 bg-light border-bottom utility-menu">
+            <div class="container d-flex flex-wrap">
+
+                <a href="/"
+                    class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none logo">
+                    <img src="./assets/images/logo.png" class="img-fluid" alt="" srcset="">
+                </a>
+
+                <ul class="nav">
+                    <li class="nav-item"><a href="./index.html" class="nav-link link-dark px-2">News</a></li>
+                    <li class="nav-item"><a href="./blog.html" class="nav-link link-dark px-2 active">Blog</a></li>
+                    <li class="nav-item ps-4"><img src="https://avatars.githubusercontent.com/u/28301945?s=40&v=4"
+                            alt="" class="rounded-circle border border-5"></li>
+                </ul>
+            </div>
+        </nav>
+
+    </header>
+    <main class="blog">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card my-4">
+                        <img src="./assets/images/f-vs-af.jpg" class="card-img-top img-fluid" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Difference between regular function and arrow function</h5>
+                            <p class="card-text">
+                                JavaScript's arrow functions might seem the same as regular functions on the surface,
+                                but they have some very important differences:
+                            </p>
+                            <ul>
+                                <li>Syntactical differences</li>
+                                <li>this value (execution context)</li>
+                                <li>Usage as methods</li>
+                                <li>Usage as constructors</li>
+                                <li>arguments binding</li>
+                            </ul>
+                            <h4>Syntax</h4>
+                            <p class="card-text">
+                                The first and most obvious difference between arrow functions and regular functions is
+                                their
+                                syntax. Not only do they look different, but arrow functions also provide an implicit
+                                return
+                                shorthand and allow parenthesis around a single argument to be omitted.
+                            </p>
+                            <h4>Execution context</h4>
+                            <p>Inside a regular function, execution context (i.e. the value of this) is dynamic. This
+                                means
+                                that the value of this depends on how the function was invoked (simple invocation,
+                                method
+                                invocation, indirect invocation or constructor invocation). On the other hand, an arrow
+                                function does not define its own execution context. This results in an arrow function's
+                                this
+                                being resolved lexically (i.e. the scope in which the arrow function was defined).</p>
+
+                            <h4>Methods</h4>
+                            <p>Due to arrow functions not defining their own execution context, they're not well-suited
+                                for usage as methods. However, thanks to the Class fields proposal, arrow functions can
+                                be used as methods inside classes, if your environment supports it.</p>
+                            <h4>Constructors</h4>
+                            <p>Regular functions can be used as constructors, using the new keyword. Yet another
+                                consequence of the lexical resolution of this inside arrow functions is that they cannot
+                                be used as constructors. Using new with an arrow function results in a TypeError.</p>
+                            <h4>Arguments</h4>
+                            <p>Another difference is the binding of the arguments object. Unlike regular functions,
+                                arrow functions don't have their own arguments object. A modern alternative that
+                                circumvents this limitation is the usage of rest parameters.</p>
+
+                            <div class="mt-5 d-flex justify-content-end">
+                                <a href="./blog.html" class="btn btn-ebtn">Go Back</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
