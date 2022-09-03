@@ -101,8 +101,7 @@ const displayNews = (an) => {
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center"><i class="fa-regular fa-eye pe-2 text-info"></i>${news?.total_view ? news?.total_view : '<span class="text-danger">No View Yet</span>'}</div>
-                                        <div><i class="fa-solid fa-star text-warning"></i>
-                                        ${news?.rating ? news?.rating?.number : '<span class="text-danger"> No Rating </span>'}
+                                        <div><i class="fa-solid fa-star text-warning"></i>${news?.rating ? news?.rating?.number : '<span class="text-danger"> No Rating </span>'}
                                         </div>
                                         <div class="pe-5"><button class="no-style-btn" onclick="loadSingleNews('${news._id}')" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-arrow-right"></i></button> </div>
                                     </div>
@@ -161,9 +160,8 @@ const displaySingleNews = newsData => {
                 </p>
             </div>
         </div>
-        <div class="d-flex align-items-center"><i class="fa-regular fa-eye pe-2"></i>${newsData?.total_view ? newsData?.total_view : '<span class="text-danger">No View Yet</span>'}</div>
-        <div class="pe-5">
-        ${newsData?.rating ? newsData?.rating?.number : '<span class="text-danger"> No Rating </span>'}
+        <div class="d-flex align-items-center"><i class="fa-regular fa-eye pe-2 text-info"></i>${newsData?.total_view ? newsData?.total_view : '<span class="text-danger">No View Yet</span>'}</div>
+        <div class="pe-5"><i class="fa-solid fa-star text-warning"></i>${newsData?.rating ? newsData?.rating?.number : '<span class="text-danger"> No Rating </span>'}
         </div>
     </div>                   
     `
@@ -180,8 +178,6 @@ const toggolLoader = isLoading => {
     }
 }
 
-// Menu Active
-
-// const navItem = document.querySelector('#main-menu').querySelectorAll('.main-item')
-
-// console.log(navItem);
+// dynamic year
+let dynamicYear = `${new Date().getFullYear()}`
+document.getElementById('this-year').innerHTML = dynamicYear
