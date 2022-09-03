@@ -33,11 +33,12 @@ body {
 }
 
 /* ==============
-Header Area 
+Home Page
 =================*/
 .nav-link {
     font-weight: 500;
     transition: 0.3s;
+    border: none;
 }
 
 .nav-link:hover {
